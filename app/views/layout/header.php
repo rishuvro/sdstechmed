@@ -18,6 +18,7 @@
     <a href="/sdstechmed/public/about">About</a>
     <a href="/sdstechmed/public/news">News</a>
     <a href="/sdstechmed/public/contact">Contact</a>
+    <a href="/sdstechmed/public/service-privacy">Service & Privacy</a>
     <a href="/sdstechmed/public/faq">FAQs</a>
   </nav>
 </header>

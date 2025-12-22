@@ -102,7 +102,7 @@ if ($uri === '/contact') {
   exit;
 }
 
-if (preg_match('#^/(about|faq|privacy-policy|terms)$#', $uri, $m)) {
+if (preg_match('#^/(about|faq|privacy-policy|terms|service-privacy)$#', $uri, $m)) {
   $slug = $m[1];
   $stmt = $pdo->prepare("SELECT * FROM pages WHERE slug=?");
   $stmt->execute([$slug]);
