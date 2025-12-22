@@ -33,12 +33,7 @@ if ($uri === '/') {
   exit;
 }
 
-$homeCategoryProducts = [];
-foreach ($cats as $c) {
-  $stmt = $pdo->prepare("SELECT * FROM products WHERE category_id=? AND status='active' ORDER BY id DESC LIMIT 4");
-  $stmt->execute([$c['id']]);
-  $homeCategoryProducts[$c['slug']] = $stmt->fetchAll();
-}
+
 
 if ($uri === '/products') {
   $cats = $pdo->query("SELECT * FROM categories ORDER BY sort_order ASC, id DESC")->fetchAll();
