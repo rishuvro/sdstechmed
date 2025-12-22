@@ -26,11 +26,18 @@ $settings = getSettings($pdo);
 
 if ($uri === '/') {
   // Example home data
-  $cats = $pdo->query("SELECT * FROM categories ORDER BY sort_order ASC, id DESC LIMIT 8")->fetchAll();
+  $cats = $pdo->query("SELECT * FROM categories WHERE featured=1 ORDER BY sort_order ASC")->fetchAll();
   $featured = $pdo->query("SELECT * FROM products WHERE featured=1 AND status='active' ORDER BY id DESC LIMIT 8")->fetchAll();
   $latestNews = $pdo->query("SELECT * FROM news ORDER BY published_at DESC, id DESC LIMIT 3")->fetchAll();
   view('home', compact('settings','cats','featured','latestNews'));
   exit;
+}
+
+$homeCategoryProducts = [];
+foreach ($cats as $c) {
+  $stmt = $pdo->prepare("SELECT * FROM products WHERE category_id=? AND status='active' ORDER BY id DESC LIMIT 4");
+  $stmt->execute([$c['id']]);
+  $homeCategoryProducts[$c['slug']] = $stmt->fetchAll();
 }
 
 if ($uri === '/products') {

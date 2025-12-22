@@ -27,13 +27,22 @@
 
   <div class="grid grid--4">
     <?php foreach ($cats as $c): ?>
-      <a class="card card--click" href="/sdstechmed/public/category/<?= htmlspecialchars($c['slug']) ?>">
+      <a class="card card--category" href="/sdstechmed/public/category/<?= htmlspecialchars($c['slug']) ?>">
+        <div class="thumb thumb--cat">
+          <?php if (!empty($c['image'])): ?>
+            <img src="/sdstechmed/public/uploads/categories/<?= htmlspecialchars($c['image']) ?>" alt="<?= htmlspecialchars($c['name']) ?>">
+          <?php else: ?>
+            <div class="thumb__placeholder">Category</div>
+          <?php endif; ?>
+        </div>
+
         <div class="card__title"><?= htmlspecialchars($c['name']) ?></div>
-        <div class="card__text"><?= htmlspecialchars($c['description'] ?? '') ?></div>
+        <div class="card__text"><?= htmlspecialchars($c['seo_h1'] ?? '') ?></div>
       </a>
     <?php endforeach; ?>
   </div>
 </section>
+
 
 <section class="section section--alt">
   <div class="section__head">
@@ -54,9 +63,11 @@
         <div class="card__text"><?= htmlspecialchars($p['short_description'] ?? '') ?></div>
         <div class="card__cta">View details →</div>
       </a>
+      
     <?php endforeach; ?>
   </div>
 </section>
+
 
 <section class="section">
   <div class="section__head">
@@ -80,3 +91,4 @@
     <?php endforeach; ?>
   </div>
 </section>
+
