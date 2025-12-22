@@ -1,0 +1,2 @@
+<?php
+// Upload handling placeholder
