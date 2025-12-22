@@ -1,0 +1,2 @@
+<?php
+// Cart logic placeholder

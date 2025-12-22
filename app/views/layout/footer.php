@@ -1,0 +1,2 @@
+<?php
+// Layout footer placeholder

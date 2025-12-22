@@ -1,0 +1,2 @@
+<?php
+// Layout header placeholder
