@@ -11,7 +11,8 @@ return [
     'charset' => 'utf8mb4',
   ],
   'uploads' => [
-    'products' => __DIR__ . '/../../public/uploads/products',
-    'news'     => __DIR__ . '/../../public/uploads/news',
-  ],
+  'categories' => __DIR__ . '/../../public/uploads/categories',
+  'products'   => __DIR__ . '/../../public/uploads/products',
+  'news'       => __DIR__ . '/../../public/uploads/news',
+],
 ];

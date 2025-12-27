@@ -12,10 +12,11 @@
 
   <div class="hero__media">
     <?php if (!empty($settings['hero_image'])): ?>
-      <img src="/sdstechmed/public/uploads/<?= htmlspecialchars($settings['hero_image']) ?>" alt="SDS Techmed Hero">
-    <?php else: ?>
-      <div class="hero__placeholder">Hero Image</div>
-    <?php endif; ?>
+  <img src="<?= $basePath ?>/uploads/<?= htmlspecialchars($settings['hero_image']) ?>" alt="Hero">
+<?php else: ?>
+  <div class="hero__placeholder">Hero Image</div>
+<?php endif; ?>
+
   </div>
 </section>
 
