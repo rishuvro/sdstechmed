@@ -1,83 +1,122 @@
 <?php
-// Variables expected: $settings, $basePath
+$basePath = $basePath ?? '/sdstechmed/public';
+$settings = $settings ?? [];
 $sent = isset($_GET['sent']) && $_GET['sent'] === '1';
 ?>
-<section class="section">
-  <div class="section__head">
-    <h2>Contact Us</h2>
-    <span class="muted">Quotation, OEM/ODM, shipping, warranty & support</span>
-  </div>
 
-  <?php if ($sent): ?>
-    <div class="card" style="border-color:rgba(34,197,94,.35);">
-      <strong>Thank you!</strong>
-      <div class="muted">Your message has been received. We will contact you shortly.</div>
+<section class="cmini">
+  <div class="cmini__wrap">
+    <div class="breadcrumb">
+      <a href="<?= $basePath ?>/">Home</a>
+      <span>›</span>
+      <span>Contact</span>
     </div>
-  <?php endif; ?>
 
-  <div class="grid" style="grid-template-columns:1fr 1fr;gap:14px;">
-    <!-- Contact Info -->
-    <div class="card">
-      <h3 style="margin-top:0;">Company Info</h3>
-
-      <div class="muted" style="margin-bottom:8px;">Company</div>
-      <div style="font-weight:800;margin-bottom:12px;">
-        <?= htmlspecialchars($settings['company_name'] ?? 'SDS Techmed') ?>
+    <div class="cmini__head">
+      <div>
+        <h1>Contact Sales</h1>
+        <p class="muted">Get quotation, OEM/ODM, shipping & support — we reply fast.</p>
       </div>
 
-      <?php if (!empty($settings['email'])): ?>
-        <div class="muted">Email</div>
-        <div style="margin-bottom:10px;">
-          <a class="link" href="mailto:<?= htmlspecialchars($settings['email']) ?>">
-            <?= htmlspecialchars($settings['email']) ?>
+      <div class="cmini__quick">
+        <?php if (!empty($settings['email'])): ?>
+          <a class="qbtn" href="mailto:<?= htmlspecialchars($settings['email']) ?>">
+            ✉️ Email
           </a>
-        </div>
-      <?php endif; ?>
+        <?php endif; ?>
 
-      <?php if (!empty($settings['phone'])): ?>
-        <div class="muted">Phone</div>
-        <div style="margin-bottom:10px;">
-          <a class="link" href="tel:<?= htmlspecialchars($settings['phone']) ?>">
-            <?= htmlspecialchars($settings['phone']) ?>
+        <?php if (!empty($settings['phone'])): ?>
+          <a class="qbtn" href="tel:<?= htmlspecialchars($settings['phone']) ?>">
+            📞 Call
           </a>
-        </div>
-      <?php endif; ?>
+        <?php endif; ?>
 
-      <?php if (!empty($settings['whatsapp'])): ?>
-        <div class="muted">WhatsApp</div>
-        <div style="margin-bottom:10px;">
-          <?= htmlspecialchars($settings['whatsapp']) ?>
-        </div>
-      <?php endif; ?>
-
-      <?php if (!empty($settings['address'])): ?>
-        <div class="muted">Address</div>
-        <div><?= nl2br(htmlspecialchars($settings['address'])) ?></div>
-      <?php endif; ?>
+        <?php if (!empty($settings['whatsapp'])): ?>
+          <!-- Replace with wa.me link later if you want -->
+          <span class="qbtn qbtn--wa">
+            💬 WhatsApp: <?= htmlspecialchars($settings['whatsapp']) ?>
+          </span>
+        <?php endif; ?>
+      </div>
     </div>
 
-    <!-- Contact Form -->
-    <div class="card" id="form">
-      <h3 style="margin-top:0;">Send an Enquiry</h3>
-
-      <form method="post" action="<?= $basePath ?>/contact">
-        <label>Your Name *</label>
-        <input name="name" required placeholder="Your full name">
-
-        <label>Email</label>
-        <input name="email" type="email" placeholder="your@email.com">
-
-        <label>WhatsApp</label>
-        <input name="whatsapp" placeholder="+880...">
-
-        <label>Message *</label>
-        <textarea name="message" rows="6" required placeholder="Tell us which product you need, quantity, country, etc."></textarea>
-
-        <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
-          <button class="btn btn--primary" type="submit">Submit</button>
-          <a class="btn btn--ghost" href="<?= $basePath ?>/products">Browse Products</a>
+    <?php if ($sent): ?>
+      <div class="cmini__alert">
+        <div class="cmini__tick">✅</div>
+        <div>
+          <div class="cmini__alertTitle">Message sent successfully</div>
+          <div class="muted">We’ll contact you shortly. For urgent orders, WhatsApp is fastest.</div>
         </div>
-      </form>
+      </div>
+    <?php endif; ?>
+
+    <div class="cmini__grid">
+      <!-- Form (main focus) -->
+      <div class="cmini__formCard" id="form">
+        <div class="cmini__formTop">
+          <div>
+            <h2 style="margin:0;">Send an Enquiry</h2>
+            <div class="muted" style="margin-top:4px;">Product + quantity + country = fastest quotation.</div>
+          </div>
+          <div class="cmini__badge">Fast Reply</div>
+        </div>
+
+        <form method="post" action="<?= $basePath ?>/contact" class="cmini__form">
+          <div class="cmini__row">
+            <div>
+              <label>Your Name *</label>
+              <input name="name" required placeholder="Your full name">
+            </div>
+            <div>
+              <label>Email</label>
+              <input name="email" type="email" placeholder="your@email.com">
+            </div>
+          </div>
+
+          <div class="cmini__row">
+            <div>
+              <label>WhatsApp</label>
+              <input name="whatsapp" placeholder="+880...">
+            </div>
+            <div>
+              <label>Country</label>
+              <input name="country" placeholder="Bangladesh / China / UAE...">
+            </div>
+          </div>
+
+          <label>Message *</label>
+          <textarea name="message" rows="6" required
+            placeholder="Example: Hair Removal Machine, Qty 10, Ship to Dubai, need warranty & training."></textarea>
+
+          <div class="cmini__actions">
+            <button class="btn btn--primary" type="submit">Submit Enquiry</button>
+            <a class="btn btn--ghost" href="<?= $basePath ?>/products">Browse Products</a>
+          </div>
+        </form>
+      </div>
+
+      <!-- Minimal info (small, not heavy) -->
+      <aside class="cmini__side">
+        <div class="cmini__infoCard">
+          <div class="cmini__infoTitle">Company</div>
+          <div class="cmini__infoValue"><?= htmlspecialchars($settings['company_name'] ?? 'SDS Techmed') ?></div>
+
+          <?php if (!empty($settings['address'])): ?>
+            <div class="muted" style="margin-top:10px;font-size:13px;">Address</div>
+            <div style="margin-top:6px;"><?= nl2br(htmlspecialchars($settings['address'])) ?></div>
+          <?php endif; ?>
+        </div>
+
+        <div class="cmini__infoCard cmini__infoCard--soft">
+          <div class="cmini__infoTitle">What you’ll receive</div>
+          <ul class="cmini__list">
+            <li> Price + MOQ</li>
+            <li> Shipping options</li>
+            <li> OEM/ODM details</li>
+            <li> Warranty & support</li>
+          </ul>
+        </div>
+      </aside>
     </div>
   </div>
 </section>

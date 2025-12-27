@@ -26,22 +26,25 @@
     <a class="link" href="/sdstechmed/public/products">View all</a>
   </div>
 
-  <div class="grid grid--4">
-    <?php foreach ($cats as $c): ?>
-      <a class="card card--category" href="/sdstechmed/public/category/<?= htmlspecialchars($c['slug']) ?>">
-        <div class="thumb thumb--cat">
-          <?php if (!empty($c['image'])): ?>
-            <img src="/sdstechmed/public/uploads/categories/<?= htmlspecialchars($c['image']) ?>" alt="<?= htmlspecialchars($c['name']) ?>">
-          <?php else: ?>
-            <div class="thumb__placeholder">Category</div>
-          <?php endif; ?>
-        </div>
+  <div class="grid grid--4 cat-grid">
+  <?php foreach ($cats as $c): ?>
+    <a class="cat-tile" href="<?= $basePath ?>/category/<?= htmlspecialchars($c['slug']) ?>">
+      <div class="cat-tile__head">
+        <?= htmlspecialchars($c['name']) ?>
+      </div>
 
-        <div class="card__title"><?= htmlspecialchars($c['name']) ?></div>
-        <div class="card__text"><?= htmlspecialchars($c['seo_h1'] ?? '') ?></div>
-      </a>
-    <?php endforeach; ?>
-  </div>
+      <div class="cat-tile__img">
+        <?php if (!empty($c['image'])): ?>
+          <img src="<?= $basePath ?>/uploads/categories/<?= htmlspecialchars($c['image']) ?>"
+               alt="<?= htmlspecialchars($c['name']) ?>">
+        <?php else: ?>
+          <div class="cat-tile__placeholder">Category Image</div>
+        <?php endif; ?>
+      </div>
+    </a>
+  <?php endforeach; ?>
+</div>
+
 </section>
 
 
